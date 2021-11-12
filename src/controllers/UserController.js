@@ -15,7 +15,12 @@ class UserController {
 		return response.json(user);
 	}
 
-	async auth(request, response) {}
+	async auth(request, response) {
+		const { email, password } = request.body;
+
+		const authenticatedUser = await UserService.auth({ email, password });
+		return response.status(200).json(authenticatedUser);
+	}
 }
 
 module.exports = new UserController();
