@@ -5,7 +5,11 @@ const router = Router();
 const UserController = require("./controllers/UserController");
 
 router.get("/", verifyAuth, (request, response) => {
-	response.status(200).json({ message: "Hello World!" });
+	response
+		.status(200)
+		.json({
+			message: "You were able to access the restricted page successfully.",
+		});
 });
 
 router.post("/user/create", UserController.create);
