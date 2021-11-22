@@ -23,12 +23,15 @@ class User extends Model {
       },
       {
         sequelize: connection,
-        modelName: "users",
-      },
+        modelName: "Users",
+        tableName: "users",
+      }
     );
   }
 
-  static associate(models) {}
+  static associate(models) {
+    this.hasMany(models.Reviews, { foreignKey: "user_id" });
+  }
 }
 
 module.exports = User;

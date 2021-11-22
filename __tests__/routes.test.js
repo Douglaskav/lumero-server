@@ -4,26 +4,8 @@
 
 const request = require("supertest");
 const app = require("../src/app");
-const connection = require("../src/database/index");
-const User = require("../src/database/models/User");
-const jwt = require("jsonwebtoken");
 
-async function generateNewTokenUserAuth() {
-	const user = await User.findOne({ where: { email: "test@test.com" } });
-
-	const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-		expiresIn: 60 * 60, // 3.6 sec
-	});
-
-	return token;
-}
-
-describe("#testing database", () => {
-	it("Should test the connection if database it's ok", async () => {
-		await connection.authenticate();
-		expect("Executing (default): SELECT 1+1 AS result");
-	});
-});
+const generateNewTokenUserAuth = require("../src/helpers/generateNewTokenUserAuth");
 
 describe("#tests for users endpoint", () => {
 	it("should be able to create a new user", async () => {

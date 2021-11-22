@@ -13,7 +13,7 @@ class CustomEnvironment extends NodeEnvironment {
 	}
 
 	setup() {
-		execSync(`${sequelize_cli} db:migrate:undo`);
+		execSync(`${sequelize_cli} db:migrate:undo:all`);
 		execSync(`${sequelize_cli} db:migrate`);
 	}
 }
