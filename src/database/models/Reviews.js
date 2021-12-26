@@ -1,7 +1,8 @@
+"use strict";
 const { Model, DataTypes } = require("sequelize");
 
 class Reviews extends Model {
-  static init(connection) {
+  static init(sequelize) {
     super.init(
       {
         id: {
@@ -9,28 +10,19 @@ class Reviews extends Model {
           defaultValue: DataTypes.UUIDV4,
           primaryKey: true,
         },
-
-        content: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-
-        stars: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
+        content: DataTypes.STRING,
+        stars: DataTypes.NUMBER,
       },
       {
-        sequelize: connection,
-        modelName: "Reviews",
+        sequelize,
+        modelName: "Review",
         tableName: "reviews",
       }
     );
   }
 
   static associate(models) {
-    this.belongsTo(models.Users, { foreignKey: "user_id", as: "user" });
-    this.belongsTo(models.Books, { foreignKey: "book_id", as: "book" });
+    // define association here
   }
 }
 

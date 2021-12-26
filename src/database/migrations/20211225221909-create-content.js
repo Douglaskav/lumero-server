@@ -1,44 +1,35 @@
 "use strict";
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.createTable("books_reviews", {
+    await queryInterface.createTable("contents", {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
         allowNull: false,
-        autoIncrement: false,
-        unique: true,
+        primaryKey: true,
       },
-
+      content: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       book_id: {
         type: Sequelize.UUID,
+        allowNull: false,
         references: { model: "books", key: "id" },
+        onUpdate: "CASCADE",
         onDelete: "CASCADE",
-        allowNull: false,
       },
-
-      review_id: {
-        type: Sequelize.UUID,
-        references: { model: "reviews", key: "id" },
-        onDelete: "CASCADE",
-        allowNull: false,
-      },
-
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
-
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
-
   down: async (queryInterface, Sequelize) => {
-    return await queryInterface.dropTable("books_reviews");
+    await queryInterface.dropTable("contents");
   },
 };

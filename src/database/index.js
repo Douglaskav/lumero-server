@@ -1,26 +1,40 @@
-const Sequelize = require("sequelize");
+const { Sequelize } = require("sequelize");
 const dbConfig = require("../config/database");
 
 const User = require("./models/User");
 const Book = require("./models/Book");
 const Reviews = require("./models/Reviews");
-const BookContent = require("./models/BookContent");
+const Content = require("./models/Content");
 
-const connection = new Sequelize(dbConfig);
+const sequelize = new Sequelize(dbConfig);
 
-User.init(connection);
-Reviews.init(connection);
-Book.init(connection);
-BookContent.init(connection);
+async function testDatabaseConnection() {
+	try {
+		sequelize.authenticate();
+		console.log("Connection has been established successfully.");
+	} catch (error) {
+		console.error("Unable to connect to the database:", error);
+	}
+}
 
-User.sync();
-Reviews.sync();
-Book.sync();
-BookContent.sync();
+User.init(sequelize);
+Book.init(sequelize);
+Reviews.init(sequelize);
+Content.init(sequelize);
 
-User.associate(connection.models);
-Reviews.associate(connection.models);
-Book.associate(connection.models);
-BookContent.associate(connection.models);
+Content.hasOne(Book, {
+	foreignKey: {
+		name: "content_id",
+	},
+});
+Book.belongsTo(Content);
 
-module.exports = connection;
+Book.hasMany(Reviews);
+Reviews.belongsTo(Book);
+
+User.hasMany(Reviews);
+Reviews.belongsTo(User);
+
+testDatabaseConnection();
+
+module.exports = sequelize;

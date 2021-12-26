@@ -1,26 +1,36 @@
 const UserService = require("../services/UserServices");
-const bcrypt = require("bcrypt");
 
 class UserController {
-	async create(request, response) {
-		const { username, email, password, photoPath } = request.body;
+  async create(request, response) {
+    const {
+      username,
+      email,
+      password,
+      image,
+      alreadyReadedBooks,
+      currentReadingBooks,
+      favoritesBooks,
+    } = request.body;
 
-		const user = await UserService.create({
-			username,
-			email,
-			password,
-			photoPath,
-		});
+    const user = await UserService.create({
+      username,
+      email,
+      password,
+      image,
+      alreadyReadedBooks,
+      currentReadingBooks,
+      favoritesBooks,
+    });
 
-		return response.json(user);
-	}
+    return response.json(user);
+  }
 
-	async auth(request, response) {
-		const { email, password } = request.body;
+  async auth(request, response) {
+    const { email, password } = request.body;
 
-		const authenticatedUser = await UserService.auth({ email, password });
-		return response.status(200).json(authenticatedUser);
-	}
+    const authenticatedUser = await UserService.auth({ email, password });
+    return response.status(200).json(authenticatedUser);
+  }
 }
 
 module.exports = new UserController();

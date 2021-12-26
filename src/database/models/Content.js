@@ -1,7 +1,7 @@
 "use strict";
 const { Model, DataTypes } = require("sequelize");
 
-class Book extends Model {
+class Content extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -10,17 +10,12 @@ class Book extends Model {
           defaultValue: DataTypes.UUIDV4,
           primaryKey: true,
         },
-        title: DataTypes.STRING,
-        synopsis: DataTypes.TEXT,
-        author: DataTypes.STRING,
-        categories: DataTypes.ARRAY(DataTypes.STRING),
-        audio_file: DataTypes.STRING,
-        cover: DataTypes.STRING,
+        content: DataTypes.TEXT,
       },
       {
         sequelize,
-        modelName: "Book",
-        tableName: "books",
+        modelName: "Content",
+        tableName: "contents",
       }
     );
   }
@@ -30,4 +25,4 @@ class Book extends Model {
   }
 }
 
-module.exports = Book;
+module.exports = Content;

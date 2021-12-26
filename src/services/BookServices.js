@@ -1,9 +1,23 @@
 const Book = require("../database/models/Book");
 
 class BookService {
-	async create(book) {
-		console.log(book);
-		return await Book.create(book);
+	async create({
+		title,
+		synopsis,
+		author,
+		categories,
+		audio_file,
+		cover,
+		content,
+	}) {
+		return await Book.create({
+			title,
+			synopsis,
+			author,
+			categories,
+			audio_file,
+			cover,
+		});
 	}
 }
 

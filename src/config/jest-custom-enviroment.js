@@ -7,14 +7,15 @@ require("dotenv").config({
 	path: resolve(__dirname, "..", "..", ".env.dev"),
 });
 
+const sequelize = require("../database/");
+
 class CustomEnvironment extends NodeEnvironment {
 	constructor(config) {
 		super(config);
 	}
 
-	setup() {
-		execSync(`${sequelize_cli} db:migrate:undo:all`);
-		execSync(`${sequelize_cli} db:migrate`);
+	async setup() {
+		await sequelize.sync({ force: true });
 	}
 }
 

@@ -3,7 +3,10 @@ const jwt = require("jsonwebtoken");
 async function verifyAuth(request, response, next) {
 	const { authorization } = request.headers;
 
-	if (!authorization) return response.status(401);
+	if (!authorization)
+		return response
+			.status(401)
+			.json({ message: "You Don't have access to this page." });
 
 	const token = authorization.replace("Bearer", "").trim();
 

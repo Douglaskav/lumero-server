@@ -5,8 +5,8 @@
 const connection = require("../src/database/index");
 
 describe("#testing database", () => {
-	it("Should test the connection if database it's ok", async () => {
-		await connection.authenticate();
-		expect("Executing (default): SELECT 1+1 AS result");
-	});
+  it("Should test the connection if database it's ok", async () => {
+    await connection.authenticate();
+    expect("Executing (default): SELECT 1+1 AS result");
+  });
 });

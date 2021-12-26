@@ -8,6 +8,8 @@ class UserServices {
       where: { email: user.email },
     });
 
+    console.log("ok");
+
     if (userAlreadyExists) throw new Error("User already exists!");
 
     user.password = await bcrypt.hashSync(user.password, 10);
