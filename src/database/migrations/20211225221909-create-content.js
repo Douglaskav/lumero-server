@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      book_id: {
+      BookId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: { model: "books", key: "id" },

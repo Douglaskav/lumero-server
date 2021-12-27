@@ -22,19 +22,15 @@ Book.init(sequelize);
 Reviews.init(sequelize);
 Content.init(sequelize);
 
-Content.hasOne(Book, {
-	foreignKey: {
-		name: "content_id",
-	},
-});
-Book.belongsTo(Content);
+testDatabaseConnection();
+
+Book.hasOne(Content);
+Content.belongsTo(Book);
 
 Book.hasMany(Reviews);
 Reviews.belongsTo(Book);
 
 User.hasMany(Reviews);
 Reviews.belongsTo(User);
-
-testDatabaseConnection();
 
 module.exports = sequelize;

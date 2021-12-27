@@ -1,4 +1,5 @@
 const Book = require("../database/models/Book");
+const Content = require("../database/models/Content");
 
 class BookService {
 	async create({
@@ -8,9 +9,9 @@ class BookService {
 		categories,
 		audio_file,
 		cover,
-		content,
+		text,
 	}) {
-		return await Book.create({
+		const book = await Book.build({
 			title,
 			synopsis,
 			author,
@@ -18,6 +19,16 @@ class BookService {
 			audio_file,
 			cover,
 		});
+
+		const content = await Content.build({
+			content: text,
+			BookId: book.dataValues.id,
+		});
+
+		await book.save();
+		await content.save();
+
+		return content;
 	}
 }
 

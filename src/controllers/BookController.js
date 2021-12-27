@@ -2,7 +2,7 @@ const BookService = require("../services/BookServices");
 
 class BookController {
 	async create(request, response) {
-		const { title, synopsis, author, categories, audio_file, cover, content } =
+		const { title, synopsis, author, categories, audio_file, cover, text } =
 			request.body;
 
 		const newBook = await BookService.create({
@@ -12,7 +12,7 @@ class BookController {
 			categories,
 			audio_file,
 			cover,
-			content,
+			text,
 		});
 
 		return response.json(newBook);

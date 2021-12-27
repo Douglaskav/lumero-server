@@ -11,7 +11,7 @@ class Reviews extends Model {
           primaryKey: true,
         },
         content: DataTypes.STRING,
-        stars: DataTypes.NUMBER,
+        stars: DataTypes.FLOAT,
       },
       {
         sequelize,
