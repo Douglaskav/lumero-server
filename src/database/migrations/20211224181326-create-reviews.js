@@ -11,14 +11,14 @@ module.exports = {
       id: {
         type: Sequelize.UUID,
       },
-      user_id: {
+      UserId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: { model: "users", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      book_id: {
+      BookId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: { model: "books", key: "id" },

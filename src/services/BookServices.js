@@ -1,5 +1,6 @@
 const Book = require("../database/models/Book");
 const Content = require("../database/models/Content");
+const Review = require("../database/models/Reviews");
 
 class BookService {
 	async create({
@@ -29,6 +30,17 @@ class BookService {
 		await content.save();
 
 		return content;
+	}
+
+	async createReview({ content, stars, BookId, UserId }) {
+		const newReview = await Review.create({
+			content,
+			stars,
+			BookId,
+			UserId,
+		});
+
+		return newReview;
 	}
 }
 

@@ -15,5 +15,6 @@ router.post("/user/create", UserController.create);
 router.post("/user/auth", UserController.auth);
 
 router.post("/book/create", BookController.create);
+router.post("/review/create", BookController.createReview);
 
 module.exports = router;

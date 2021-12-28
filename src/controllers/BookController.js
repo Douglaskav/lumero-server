@@ -17,6 +17,19 @@ class BookController {
 
 		return response.json(newBook);
 	}
+
+	async createReview(request, response) {
+		const { content, stars, BookId, UserId } = request.body;
+
+		const review = await BookService.createReview({
+			content,
+			stars,
+			BookId,
+			UserId,
+		});
+
+		return response.json(review);
+	}
 }
 
 module.exports = new BookController();
