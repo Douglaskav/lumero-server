@@ -8,21 +8,10 @@ const Content = require("./models/Content");
 
 const sequelize = new Sequelize(dbConfig);
 
-async function testDatabaseConnection() {
-	try {
-		sequelize.authenticate();
-		console.log("Connection has been established successfully.");
-	} catch (error) {
-		console.error("Unable to connect to the database:", error);
-	}
-}
-
 User.init(sequelize);
 Book.init(sequelize);
 Reviews.init(sequelize);
 Content.init(sequelize);
-
-testDatabaseConnection();
 
 Book.hasOne(Content);
 Content.belongsTo(Book);

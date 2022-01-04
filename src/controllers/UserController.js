@@ -12,24 +12,32 @@ class UserController {
       favoritesBooks,
     } = request.body;
 
-    const user = await UserService.create({
-      username,
-      email,
-      password,
-      image,
-      alreadyReadedBooks,
-      currentReadingBooks,
-      favoritesBooks,
-    });
+    try {
+      const user = await UserService.create({
+        username,
+        email,
+        password,
+        image,
+        alreadyReadedBooks,
+        currentReadingBooks,
+        favoritesBooks,
+      });
 
-    return response.json(user);
+      return response.status(200).json(user);
+    } catch (err) {
+      return response.status(404).json({ message: err.message });
+    }
   }
 
   async auth(request, response) {
     const { email, password } = request.body;
 
-    const authenticatedUser = await UserService.auth({ email, password });
-    return response.status(200).json(authenticatedUser);
+    try {
+      const authenticatedUser = await UserService.auth({ email, password });
+      return response.status(200).json(authenticatedUser);
+    } catch (err) {
+      return response.status(401).json({ message: err.message });
+    }
   }
 }
 

@@ -3,16 +3,11 @@ const Content = require("../database/models/Content");
 const Review = require("../database/models/Reviews");
 
 class BookService {
-	async create({
-		title,
-		synopsis,
-		author,
-		categories,
-		audio_file,
-		cover,
-		text,
-	}) {
-		const book = await Book.build({
+	async create(book) {
+		const { title, synopsis, author, categories, audio_file, cover, text } =
+			book;
+
+		const bookBuild = await Book.build({
 			title,
 			synopsis,
 			author,
@@ -23,10 +18,10 @@ class BookService {
 
 		const content = await Content.build({
 			content: text,
-			BookId: book.dataValues.id,
+			BookId: bookBuild.dataValues.id,
 		});
 
-		await book.save();
+		await bookBuild.save();
 		await content.save();
 
 		return content;
