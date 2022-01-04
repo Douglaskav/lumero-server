@@ -11,8 +11,8 @@ router.get("/", verifyAuth, (request, response) => {
 	});
 });
 
-router.post("/user/create", UserController.create);
-router.post("/user/auth", UserController.auth);
+router.post("/user/create", UserController.createNewUser);
+router.post("/user/auth", UserController.authUser);
 
 router.post("/book/create", BookController.create);
 router.post("/review/create", BookController.createReview);

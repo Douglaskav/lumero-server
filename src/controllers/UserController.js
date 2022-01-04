@@ -1,44 +1,29 @@
+"use strict";
+
 const UserService = require("../services/UserServices");
 
-class UserController {
-  async create(request, response) {
-    const {
-      username,
-      email,
-      password,
-      image,
-      alreadyReadedBooks,
-      currentReadingBooks,
-      favoritesBooks,
-    } = request.body;
-
-    try {
-      const user = await UserService.create({
-        username,
-        email,
-        password,
-        image,
-        alreadyReadedBooks,
-        currentReadingBooks,
-        favoritesBooks,
-      });
-
-      return response.status(200).json(user);
-    } catch (err) {
-      return response.status(404).json({ message: err.message });
-    }
+const createNewUser = async (req, res, next) => {
+  try {
+    res.json(await generateANewUser(req.body));
+  } catch (err) {
+    res.status(409).json({ message: err.message });
   }
+};
 
-  async auth(request, response) {
-    const { email, password } = request.body;
-
-    try {
-      const authenticatedUser = await UserService.auth({ email, password });
-      return response.status(200).json(authenticatedUser);
-    } catch (err) {
-      return response.status(401).json({ message: err.message });
-    }
+const authUser = async (req, res, next) => {
+  try {
+    res.json(await authenticateTheUser(req.body));
+  } catch (err) {
+    res.status(401).json({ message: err.message });
   }
-}
+};
 
-module.exports = new UserController();
+const generateANewUser = async (User) => {
+  return await UserService.create(User);
+};
+
+const authenticateTheUser = async (UserCredentials) => {
+  return await UserService.auth(UserCredentials);
+};
+
+module.exports = { createNewUser, authUser };
