@@ -37,6 +37,10 @@ class BookService {
 
 		return newReview;
 	}
+
+	async getAll() {
+		return await Book.findAll();
+	}
 }
 
 module.exports = new BookService();

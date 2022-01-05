@@ -1,6 +1,6 @@
-const User = require("../database/models/User");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const User = require("../database/models/User"),
+  bcrypt = require("bcrypt"),
+  jwt = require("jsonwebtoken");
 
 class UserServices {
   async create(user) {
@@ -10,7 +10,7 @@ class UserServices {
 
     if (userAlreadyExists) throw new Error("User already exists!");
 
-    user.password = await bcrypt.hashSync(user.password, 10);
+    user.password = bcrypt.hashSync(user.password, 10);
     const newUser = await User.create(user);
 
     return newUser;

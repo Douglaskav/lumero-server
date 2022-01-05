@@ -30,6 +30,10 @@ class BookController {
 
 		return response.json(review);
 	}
+
+	async getAll(request, response) {
+		return response.json(await BookService.getAll());
+	}
 }
 
 module.exports = new BookController();
