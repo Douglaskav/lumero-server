@@ -1,39 +1,32 @@
 const BookService = require("../services/BookServices");
 
 class BookController {
-	async create(request, response) {
-		const { title, synopsis, author, categories, audio_file, cover, text } =
-			request.body;
+  createNewBook = async (req, res) => {
+    try {
+      res.json(await this.generateANewBook(req.body));
+    } catch (err) {
+      res.status(409).json({ message: err.message });
+    }
+  };
 
-		const newBook = await BookService.create({
-			title,
-			synopsis,
-			author,
-			categories,
-			audio_file,
-			cover,
-			text,
-		});
+  async createReview(request, response) {
+    const { content, stars, BookId, UserId } = request.body;
 
-		return response.json(newBook);
-	}
+    const review = await BookService.createReview({
+      content,
+      stars,
+      BookId,
+      UserId,
+    });
 
-	async createReview(request, response) {
-		const { content, stars, BookId, UserId } = request.body;
+    return response.json(review);
+  }
 
-		const review = await BookService.createReview({
-			content,
-			stars,
-			BookId,
-			UserId,
-		});
+  async getAll(request, response) {
+    return response.json(await BookService.getAll());
+  }
 
-		return response.json(review);
-	}
-
-	async getAll(request, response) {
-		return response.json(await BookService.getAll());
-	}
+  generateANewBook = async (Book) => await BookService.create(Book);
 }
 
 module.exports = new BookController();
