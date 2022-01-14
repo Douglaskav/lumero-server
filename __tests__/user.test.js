@@ -76,6 +76,7 @@ describe("#tests for books endpoint's", () => {
       .send({
         title: "A book",
         synopsis: "this is the synopsis of the book",
+        content: "this is the content of the book writted by test",
         author: "test",
         categories: ["test", "development", "creation"],
         audio_file: "/test/book.mp3",
@@ -86,7 +87,6 @@ describe("#tests for books endpoint's", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("content");
-    expect(response.body).toHaveProperty("BookId");
   });
 });
 

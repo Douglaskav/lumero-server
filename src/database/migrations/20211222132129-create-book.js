@@ -16,6 +16,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      content: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       author: {
         type: Sequelize.STRING,
         allowNull: false,
