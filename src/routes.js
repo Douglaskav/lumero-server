@@ -1,7 +1,38 @@
 const { Router } = require("express");
 const verifyAuth = require("./middlewares/verifyAuth");
-
 const router = Router();
+
+const path = require("path");
+
+const multer = require("multer");
+
+const storageForUsers = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, `${__dirname}/assets/users/`);
+  },
+
+  // By default, multer removes file extensions so let's add them back
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const storageForBooks = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, `${__dirname}/assets/books/`);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+});
+
+const uploadUsers = multer({ storage: storageForUsers });
+const uploadBooks = multer({ storage: storageForBooks });
+
 const UserController = require("./controllers/UserController");
 const BookController = require("./controllers/BookController");
 const ReviewController = require("./controllers/ReviewController");
@@ -12,10 +43,18 @@ router.get("/", verifyAuth, (request, response) => {
   });
 });
 
-router.post("/user/create", UserController.createNewUser);
+router.post(
+  "/user/create",
+  uploadUsers.single("image"),
+  UserController.createNewUser
+);
 router.post("/user/auth", UserController.authUser);
 
-router.post("/book/create", BookController.createNewBook);
+router.post(
+  "/book/create",
+  uploadBooks.single("cover"),
+  BookController.createNewBook
+);
 router.get("/book/getall", BookController.getAll);
 
 router.post("/review/create", ReviewController.createNewReview);
