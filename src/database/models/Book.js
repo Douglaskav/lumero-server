@@ -14,7 +14,7 @@ class Book extends Model {
         synopsis: DataTypes.TEXT,
         content: DataTypes.TEXT,
         author: DataTypes.STRING,
-        categories: DataTypes.ARRAY(DataTypes.STRING),
+        categories: DataTypes.STRING,
         audio_file: DataTypes.STRING,
         cover: DataTypes.STRING,
       },

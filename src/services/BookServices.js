@@ -8,7 +8,9 @@ class BookService {
   }
 
   async getAll() {
-    return await Book.findAll();
+    const book = await Book.findAll();
+
+    console.log(book);
   }
 }
 

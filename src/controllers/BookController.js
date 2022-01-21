@@ -1,12 +1,12 @@
+"use strict";
+
 const BookService = require("../services/BookServices");
 
 class BookController {
   createNewBook = async (req, res) => {
-    try {
-      res.json(await this.generateANewBook(req.body));
-    } catch (err) {
-      res.status(409).json({ message: err.message });
-    }
+    req.body.cover = req.file.path;
+    console.log(req.body);
+    res.json(await this.generateANewBook(req.body));
   };
 
   async createReview(request, response) {

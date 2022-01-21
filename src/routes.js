@@ -11,7 +11,6 @@ const storageForUsers = multer.diskStorage({
     cb(null, `${__dirname}/assets/users/`);
   },
 
-  // By default, multer removes file extensions so let's add them back
   filename: function (req, file, cb) {
     cb(
       null,
@@ -24,9 +23,12 @@ const storageForBooks = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, `${__dirname}/assets/books/`);
   },
+
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + "-" + uniqueSuffix);
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
   },
 });
 
