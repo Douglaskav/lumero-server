@@ -6,13 +6,16 @@ const request = require("supertest"),
   app = require("../src/app"),
   connection = require("../src/database/index");
 
+const imagetest = __dirname + "/../src/assets/books/test/cover.jpg";
+
 describe("#tests for users endpoint's", () => {
   it("should be able to create a new user", async () => {
-    const response = await request(app).post("/user/create").send({
-      username: "Test",
-      email: "test@test.com",
-      password: "test",
-    });
+    const response = await request(app)
+      .post("/user/create")
+      .field("username", "Test")
+      .field("email", "test@test.com")
+      .field("password", "test")
+      .attach("image", imagetest);
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty("id");
@@ -73,16 +76,12 @@ describe("#tests for books endpoint's", () => {
   it("should be able to create a new book", async () => {
     const response = await request(app)
       .post("/book/create")
-      .send({
-        title: "A book",
-        synopsis: "this is the synopsis of the book",
-        content: "this is the content of the book writted by test",
-        author: "test",
-        categories: ["test", "development", "creation"],
-        audio_file: "/test/book.mp3",
-        cover: "/test/cover.jpg",
-        text: "The content of the book",
-      });
+      .field("title", "A book")
+      .field("synopsis", "This is the synopsis of the book")
+      .field("content", "This is the content of the book writted by test")
+      .field("categories", "['test', 'development', 'creation']")
+      .field("audio_file", "/test/book.mp3")
+      .attach("cover", imagetest);
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty("id");

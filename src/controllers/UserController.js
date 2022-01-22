@@ -5,7 +5,7 @@ const UserService = require("../services/UserServices");
 class UserController {
   createNewUser = async (req, res) => {
     try {
-      req.body.image = req.file.path;
+      req.file ? (req.body.image = req.file.path) : "";
       console.log(req.body);
       res.json(await this.generateANewUser(req.body));
     } catch (err) {
