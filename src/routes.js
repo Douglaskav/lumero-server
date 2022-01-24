@@ -10,18 +10,10 @@ const {
 
 const { uploadUsers, uploadBooks } = require("./middlewares/uploadImages");
 
-router.post(
-	"/user/create",
-	uploadUsers.single("image"),
-	UserController.createNewUser
-);
-router.post("/user/auth", UserController.authUser);
+router.post("/user/create", uploadUsers.single("image"), UserController.create);
+router.post("/user/auth", UserController.authenticate);
 
-router.post(
-	"/book/create",
-	uploadBooks.single("cover"),
-	BookController.createNewBook
-);
-router.post("/review/create", ReviewController.createNewReview);
+router.post("/book/create", uploadBooks.single("cover"), BookController.create);
+router.post("/review/create", ReviewController.create);
 
 module.exports = router;

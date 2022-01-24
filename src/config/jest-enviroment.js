@@ -15,7 +15,7 @@ class CustomEnvironment extends NodeEnvironment {
 	}
 
 	async setup() {
-		await sequelize.sync({ force: true });
+		await sequelize.sync({ force: true, logging: false });
 		execSync(`${sequelize_cli} db:seed:all`);
 	}
 }

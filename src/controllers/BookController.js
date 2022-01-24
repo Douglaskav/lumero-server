@@ -2,30 +2,13 @@
 
 const BookService = require("../services/BookServices");
 
-class BookController {
-  createNewBook = async (req, res) => {
-    req.file ? (req.body.cover = req.file.path) : "";
-    res.json(await this.generateANewBook(req.body));
-  };
+const _buildNewBook = async (Book) => await BookService.create(Book);
 
-  async createReview(request, response) {
-    const { content, stars, BookId, UserId } = request.body;
-
-    const review = await BookService.createReview({
-      content,
-      stars,
-      BookId,
-      UserId,
-    });
-
-    return response.json(review);
-  }
-
-  async getAll(request, response) {
-    return response.json(await BookService.getAll());
-  }
-
-  generateANewBook = async (Book) => await BookService.create(Book);
-}
-
-module.exports = new BookController();
+exports.create = async (req, res) => {
+	try {
+		req.file ? (req.body.cover = req.file.path) : "";
+		res.json(await _buildNewBook(req.body));
+	} catch (err) {
+		res.status(409).json({ message: err.message });
+	}
+};

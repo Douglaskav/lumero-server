@@ -2,16 +2,12 @@
 
 const ReviewService = require("../services/ReviewServices");
 
-class ReviewController {
-  createNewReview = async (req, res) => {
-    try {
-      res.json(await this.generateANewReviews(req.body));
-    } catch (err) {
-      res.status(409).json({ message: err.message });
-    }
-  };
+const _buildNewReview = async (Review) => await ReviewService.create(Review);
 
-  generateANewReviews = async (Review) => await ReviewService.create(Review);
-}
-
-module.exports = new ReviewController();
+exports.create = async (req, res) => {
+	try {
+		res.json(await _buildNewReview(req.body));
+	} catch (err) {
+		res.status(409).json({ message: err.message });
+	}
+};
