@@ -5,7 +5,6 @@ const BookService = require("../services/BookServices");
 class BookController {
   createNewBook = async (req, res) => {
     req.file ? (req.body.cover = req.file.path) : "";
-    console.log(req.body);
     res.json(await this.generateANewBook(req.body));
   };
 

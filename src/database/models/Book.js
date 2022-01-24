@@ -2,33 +2,54 @@
 const { Model, DataTypes } = require("sequelize");
 
 class Book extends Model {
-  static init(sequelize) {
-    super.init(
-      {
-        id: {
-          type: DataTypes.UUID,
-          defaultValue: DataTypes.UUIDV4,
-          primaryKey: true,
-        },
-        title: DataTypes.STRING,
-        synopsis: DataTypes.TEXT,
-        content: DataTypes.TEXT,
-        author: DataTypes.STRING,
-        categories: DataTypes.STRING,
-        audio_file: DataTypes.STRING,
-        cover: DataTypes.STRING,
-      },
-      {
-        sequelize,
-        modelName: "Book",
-        tableName: "books",
-      }
-    );
-  }
+	static init(sequelize) {
+		super.init(
+			{
+				id: {
+					type: DataTypes.UUID,
+					defaultValue: DataTypes.UUIDV4,
+					primaryKey: true,
+				},
+				title: {
+					type: DataTypes.STRING,
+					allowNull: false,
+				},
+				synopsis: {
+					type: DataTypes.TEXT,
+					allowNull: false,
+				},
+				content: {
+					type: DataTypes.TEXT,
+					allowNull: false,
+				},
+				author: {
+					type: DataTypes.STRING,
+					allowNull: false,
+				},
+				categories: {
+					type: DataTypes.STRING,
+					allowNull: false,
+				},
+				audio_file: {
+					type: DataTypes.STRING,
+					allowNull: false,
+				},
+				cover: {
+					type: DataTypes.STRING,
+					allowNull: false,
+				},
+			},
+			{
+				sequelize,
+				modelName: "Book",
+				tableName: "books",
+			}
+		);
+	}
 
-  static associate(models) {
-    // define association here
-  }
+	static associate(models) {
+		// define association here
+	}
 }
 
 module.exports = Book;
