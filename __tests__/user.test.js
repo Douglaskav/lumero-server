@@ -24,7 +24,7 @@ describe("#tests for users endpoint's", () => {
 
 		expect(response.statusCode).toBe(409);
 		expect(response.body).toStrictEqual({
-			message: "User already exists!",
+			error: "User already exists!",
 		});
 	});
 });
@@ -49,7 +49,7 @@ describe("#user authentication tests", () => {
 
 		expect(response.statusCode).toBe(401);
 		expect(response.body).toStrictEqual({
-			message: "Password incorrect!",
+			error: "Password incorrect!",
 		});
 	});
 
@@ -61,7 +61,7 @@ describe("#user authentication tests", () => {
 
 		expect(response.statusCode).toBe(401);
 		expect(response.body).toStrictEqual({
-			message: "User not exists!",
+			error: "User not exists!",
 		});
 	});
 });

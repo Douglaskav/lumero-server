@@ -9,6 +9,6 @@ exports.create = async (req, res) => {
 		req.file ? (req.body.cover = req.file.path) : "";
 		res.json(await _buildNewBook(req.body));
 	} catch (err) {
-		res.status(409).json({ message: err.message });
+		res.status(409).json({ error: err.message });
 	}
 };
