@@ -8,9 +8,13 @@ const {
 	ReviewController,
 } = require("./controllers");
 
-const { uploadUsers, uploadBooks } = require("./middlewares/uploadImages");
+const { uploadBooks } = require("./middlewares/uploadImages");
 
-router.post("/user/create", uploadUsers.single("image"), UserController.create);
+router.get("/user/a", (req, res) => {
+	return res.json({ message: "Hello World!"});
+});
+
+router.post("/user/create", UserController.create);
 router.post("/user/auth", UserController.authenticate);
 
 router.post("/book/create", uploadBooks.single("cover"), BookController.create);

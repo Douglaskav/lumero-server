@@ -6,13 +6,11 @@ const imagetest = __dirname + "/../src/assets/books/test/cover.jpg";
 
 describe("#tests for users endpoint's", () => {
 	it("should be able to create a new user", async () => {
-		const response = await request(app)
-			.post("/user/create")
-			.field("username", "Test")
-			.field("email", "test@test.com")
-			.field("password", "test")
-			.attach("image", imagetest);
-
+		const response = await request(app).post("/user/create").send({
+			username: "Test",
+			email: "test@test.com",
+			password: "test",
+		});
 		expect(response.statusCode).toBe(200);
 		expect(response.body).toHaveProperty("id");
 	});

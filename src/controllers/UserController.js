@@ -17,6 +17,7 @@ exports.create = async (req, res) => {
 
 exports.authenticate = async (req, res) => {
 	try {
+		console.log(2);
 		res.json(await _buildNewAuthToken(req.body));
 	} catch (err) {
 		res.status(401).json({ message: err.message });
