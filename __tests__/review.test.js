@@ -7,7 +7,7 @@ describe("#tests for review endpoint's", () => {
 		const response = await request(app).post("/review/create").send({
 			content: "This is a test review",
 			stars: 5.0,
-			BookId: "e2c8a4a6-5af8-4ae3-9215-8a8ad5859eaa",
+			BookId: "944484bc-9563-47d5-863e-8bfbc3234d7c",
 			UserId: "3b197129-0aab-4461-bf5c-e3197492ec15",
 		});
 

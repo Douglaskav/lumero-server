@@ -28,7 +28,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      audio_file: {
+      language: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      pages: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      time: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      audio_files: {
         type: Sequelize.STRING,
         allowNull: false,
       },

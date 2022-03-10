@@ -30,7 +30,19 @@ class Book extends Model {
 					type: DataTypes.STRING,
 					allowNull: false,
 				},
-				audio_file: {
+				language: {
+					type: DataTypes.STRING,
+					allowNull: false
+				},
+				pages: {
+					type: DataTypes.INTEGER,
+					allowNull: false,
+				},
+				time: {
+					type: DataTypes.STRING,
+					allowNull: false
+				},
+				audio_files: {
 					type: DataTypes.STRING,
 					allowNull: false,
 				},

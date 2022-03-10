@@ -13,7 +13,10 @@ describe("#tests for books endpoint's", () => {
 			.field("content", "This is the content of the book writted by test")
 			.field("author", "Jest")
 			.field("categories", "['test', 'development', 'creation']")
-			.field("audio_file", "/test/book.mp3")
+			.field("language", "English")
+			.field("pages", 299)
+			.field("time", "03:23:29")
+			.field("audio_files", "/test/book.mp3")
 			.attach("cover", imagetest);
 
 		expect(response.statusCode).toBe(200);

@@ -10,10 +10,6 @@ const {
 
 const { uploadBooks } = require("./middlewares/uploadImages");
 
-router.get("/user/a", (req, res) => {
-	return res.json({ message: "Hello World!"});
-});
-
 router.post("/user/create", UserController.create);
 router.post("/user/auth", UserController.authenticate);
 

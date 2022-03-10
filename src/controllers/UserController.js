@@ -3,8 +3,7 @@
 const UserService = require("../services/UserServices");
 
 const _buildNewUser = async (User) => await UserService.create(User);
-const _buildNewAuthToken = async (UserCredentials) =>
-	await UserService.auth(UserCredentials);
+const _buildNewAuthToken = async (UserCredentials) =>	await UserService.auth(UserCredentials);
 
 exports.create = async (req, res) => {
 	try {
