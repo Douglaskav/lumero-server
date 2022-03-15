@@ -43,7 +43,7 @@ class Book extends Model {
 					allowNull: false
 				},
 				audio_files: {
-					type: DataTypes.STRING,
+					type: DataTypes.TEXT,
 					allowNull: false,
 				},
 				cover: {

@@ -41,7 +41,7 @@ module.exports = {
         allowNull: false,
       },
       audio_files: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       cover: {
