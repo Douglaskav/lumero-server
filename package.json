@@ -5,7 +5,9 @@
 	"license": "MIT",
 	"scripts": {
 		"dev": "nodemon src/server.js",
-		"test": "jest --runInBand --detectOpenHandles --env=./src/config/jest-enviroment"
+		"test": "jest --runInBand --detectOpenHandles --env=./src/config/jest-enviroment",
+		"test:init": "jest --runInBand --detectOpenHandles --env=./src/config/jest-enviroment.js --testPathPattern=./__tests__/init/",
+		"test:unit": "jest --testPathPattern=./__tests__/unit/"
 	},
 	"jest": {
 		"testEnvironment": "node"

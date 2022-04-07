@@ -1,7 +1,7 @@
 const Review = require("../database/models/Reviews");
 
 exports.create = async ({ content, stars, BookId, UserId }) => {
-	if (!content && !stars) {
+	if (!content && !stars && !BookId && !UserId) {
 		throw new Error("please fill the fields");
 	}
 

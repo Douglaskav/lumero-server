@@ -1,8 +1,6 @@
 const request = require("supertest"),
-	app = require("../src/app"),
-	connection = require("../src/database/index");
-
-const imagetest = __dirname + "/../src/assets/books/test/cover.jpg";
+	app = require("../../src/app"),
+	connection = require("../../src/database/index");
 
 describe("#tests for users endpoint's", () => {
 	it("should be able to create a new user", async () => {

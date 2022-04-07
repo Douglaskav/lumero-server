@@ -58,10 +58,6 @@ class Book extends Model {
 			}
 		);
 	}
-
-	static associate(models) {
-		// define association here
-	}
 }
 
 module.exports = Book;

@@ -7,7 +7,6 @@ const _buildNewAuthToken = async (UserCredentials) =>	await UserService.auth(Use
 
 exports.create = async (req, res) => {
 	try {
-		req.file ? (req.body.image = req.file.path) : "";
 		res.json(await _buildNewUser(req.body));
 	} catch (err) {
 		res.status(409).json({ error: err.message });

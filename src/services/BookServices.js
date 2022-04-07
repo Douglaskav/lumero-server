@@ -2,16 +2,25 @@ const Book = require("../database/models/Book");
 const Sequelize = require("sequelize");
 
 exports.create = async (book) => {
-	return await Book.create(book);
+
+	if (book.title) {	
+		return await Book.create(book);
+	}
+
+	throw new Error("The book need a title");
 };
 
 exports.index = async () => {
-	let limit = Math.floor(Math.random() * (7 - 3) + 3);
+	let limit = Math.floor(Math.random() * 4 + 3);
 	return await Book.findAll({ order: [Sequelize.literal("random()")], limit });
 };
 
 exports.indexById = async (book_id) => {
-	return await Book.findOne({
+	let book_detail = await Book.findOne({
 		where: { id: book_id },
 	});
+
+	if (!book_detail) throw new Error("The book doesn't exists!");
+
+	return book_detail;
 };

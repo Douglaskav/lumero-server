@@ -28,10 +28,6 @@ class User extends Model {
       }
     );
   }
-
-  static associate(models) {
-    // define association here
-  }
 }
 
 module.exports = User;

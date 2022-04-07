@@ -1,6 +1,5 @@
 const request = require("supertest"),
-	app = require("../src/app"),
-	connection = require("../src/database/index");
+	app = require("../../src/app");
 
 describe("#tests for review endpoint's", () => {
 	it("Create a test for review creation", async () => {
@@ -14,4 +13,16 @@ describe("#tests for review endpoint's", () => {
 		expect(response.statusCode).toBe(200);
 		expect(response.body).toHaveProperty("id");
 	});
+
+	it("should return a error when the fields are not fill", async () => {
+		const response = await request(app).post("/review/create").send({
+			content: "",
+			stars: 0,
+			BookId: "",
+			UserId: "",
+		});
+
+		expect(response.statusCode).toBe(409);
+		expect(response.body.error).toBe("please fill the fields");
+	});	
 });

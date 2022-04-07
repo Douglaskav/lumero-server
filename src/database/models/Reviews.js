@@ -20,10 +20,6 @@ class Reviews extends Model {
       }
     );
   }
-
-  static associate(models) {
-    // define association here
-  }
 }
 
 module.exports = Reviews;
