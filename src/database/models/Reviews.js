@@ -10,7 +10,7 @@ class Reviews extends Model {
           defaultValue: DataTypes.UUIDV4,
           primaryKey: true,
         },
-        content: DataTypes.STRING,
+        content: DataTypes.TEXT,
         stars: DataTypes.FLOAT,
       },
       {
