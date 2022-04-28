@@ -11,6 +11,8 @@ const { uploadBooks } = require("./middlewares/uploadImages");
 
 router.post("/user/create", UserController.create);
 router.post("/user/auth", UserController.authenticate);
+router.get("/user/favoriteBooks/:user_id", UserController.indexFavoriteBooks);
+router.post("/user/addFavoriteBook", UserController.favoriteBook);
 
 router.post("/book/create", uploadBooks.single("cover"), BookController.create);
 

@@ -10,7 +10,9 @@ exports.create = async (book) => {
 };
 
 exports.index = async () => {
-	let limit = Math.floor(Math.random() * 4 + 3);
+	// Returns a random integer from 0 to 7:
+	let limit = Math.floor(Math.random() * 8);
+
 	return await Book.findAll({ order: [Sequelize.literal("random()")], limit });
 };
 
@@ -21,8 +23,8 @@ exports.indexById = async (id) => {
 			model: Review,
 			limit: 3,
 			include: {
-				model: User
-			}
+				model: User,
+			},
 		},
 	});
 

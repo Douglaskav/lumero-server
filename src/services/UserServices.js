@@ -1,4 +1,5 @@
 const User = require("../database/models/User"),
+	Book = require("../database/models/Book"),
 	bcrypt = require("bcrypt"),
 	jwt = require("jsonwebtoken");
 
@@ -29,4 +30,37 @@ exports.auth = async ({ email, password }) => {
 	});
 
 	return { user, token };
+};
+
+exports.addFavoriteBook = async ({ BookId, UserId }) => {
+	const user = await User.findOne({ where: { id: UserId } });
+	const bookExists = await Book.findOne({ where: { id: BookId } });
+
+	if (!bookExists) throw new Error("O livro não existe");
+
+	let favorites_books = [];
+
+	favorites_books.push(...user.favorites_books);
+
+	if (favorites_books.includes(BookId))
+		throw new Error("O livro já está na sua lista de favoritos");
+
+	favorites_books.push(BookId);
+
+	await User.update(
+		{ favorites_books },
+		{
+			where: {
+				id: UserId,
+			},
+		}
+	);
+
+	return { BookId, favorites_books };
+};
+
+exports.indexFavoriteBooks = async ({ user_id }) => {
+	const { favorites_books } = await User.findOne({ where: { id: user_id } });
+
+	return { favorites_books };
 };

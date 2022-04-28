@@ -16,7 +16,11 @@ exports.create = async (req, res) => {
 };
 
 exports.index = async (req, res) => {
-	res.status(200).json(await _getBooks());
+	try {
+		res.status(200).json(await _getBooks());
+	} catch (err) {
+		res.status(409).json({ error: err.message });
+	}
 };
 
 exports.indexById = async (req, res) => {
