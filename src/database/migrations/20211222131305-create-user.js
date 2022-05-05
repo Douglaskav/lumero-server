@@ -27,17 +27,17 @@ module.exports = {
       },
 
       already_readed_books: {
-        type: Sequelize.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
       },
 
       current_reading_books: {
-        type: Sequelize.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
       },
 
       favorites_books: {
-        type: Sequelize.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
       },
 

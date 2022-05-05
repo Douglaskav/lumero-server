@@ -1,5 +1,6 @@
 const User = require("../database/models/User"),
 	Book = require("../database/models/Book"),
+	{ indexById } = require("./BookServices"),
 	bcrypt = require("bcrypt"),
 	jwt = require("jsonwebtoken");
 
@@ -36,13 +37,14 @@ exports.addFavoriteBook = async ({ BookId, UserId }) => {
 	const user = await User.findOne({ where: { id: UserId } });
 	const bookExists = await Book.findOne({ where: { id: BookId } });
 
-	if (!bookExists) throw new Error("O livro não existe");
-
 	let favorites_books = [];
 
-	favorites_books.push(...user.favorites_books);
+	if (!user) throw new Error("O usuário não existe");
+	if (!bookExists) throw new Error("O livro não existe");
 
-	if (favorites_books.includes(BookId))
+	if (user.favorites_books) favorites_books.push(...user.favorites_books);
+
+	if (user.favorites_books && favorites_books.includes(BookId))
 		throw new Error("O livro já está na sua lista de favoritos");
 
 	favorites_books.push(BookId);
@@ -60,7 +62,15 @@ exports.addFavoriteBook = async ({ BookId, UserId }) => {
 };
 
 exports.indexFavoriteBooks = async ({ user_id }) => {
-	const { favorites_books } = await User.findOne({ where: { id: user_id } });
+	const user = await User.findOne({ where: { id: user_id } });
+	let favorites_books_list = [];
 
-	return { favorites_books };
+	if (!user) throw new Error("Usuário inexistente!");
+	if (!user.favorites_books) return { favorites_books: [] };
+
+	for (let i=0; i < user.favorites_books.length; i++) {
+		favorites_books_list.push(await indexById(user.favorites_books[i]));
+	}
+
+	return { favorites_books: favorites_books_list };
 };

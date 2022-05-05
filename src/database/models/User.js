@@ -17,17 +17,14 @@ class User extends Model {
         },
         password: DataTypes.STRING,
         image: DataTypes.STRING,
-        already_readed_books: DataTypes.JSON, 
-        current_reading_books: DataTypes.JSON,
-        favorites_books: DataTypes.JSON
+        already_readed_books: DataTypes.ARRAY(DataTypes.STRING),
+        current_reading_books: DataTypes.ARRAY(DataTypes.STRING),
+        favorites_books: DataTypes.ARRAY(DataTypes.STRING),
       },
       {
         sequelize,
         modelName: "User",
         tableName: "users",
-        defaultScope: {
-          attributes: { exclude: ["password"] },
-        },
       }
     );
   }

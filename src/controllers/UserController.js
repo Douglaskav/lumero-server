@@ -30,7 +30,7 @@ exports.favoriteBook = async (req, res) => {
 	try {
 		res.json(await _addBookToFavorites(req.body));
 	} catch (err) {
-		res.status(409).json({ error: err.message });
+		res.status(404).json({ error: err.message });
 	}
 };
 
