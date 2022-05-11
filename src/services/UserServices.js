@@ -5,6 +5,7 @@ const User = require("../database/models/User"),
 	jwt = require("jsonwebtoken");
 
 exports.create = async (user) => {
+	user.email = user.email.toLowerCase();
 	const userAlreadyExists = await User.findOne({
 		where: { email: user.email },
 	});
@@ -18,6 +19,7 @@ exports.create = async (user) => {
 };
 
 exports.auth = async ({ email, password }) => {
+	email = email.toLowerCase();
 	const user = await User.findOne({ where: { email } });
 	if (!user) throw new Error("User not exists!");
 

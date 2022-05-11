@@ -20,5 +20,6 @@ router.get("/book/list", BookController.index);
 router.get("/book/profile/:book_id", BookController.indexById);
 
 router.post("/review/create", ReviewController.create);
+router.get("/review/:user_id", ReviewController.indexByUserId);
 
 module.exports = router;
