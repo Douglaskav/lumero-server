@@ -32,3 +32,20 @@ exports.indexById = async (id) => {
 
 	return book_detail;
 };
+
+exports.indexByCategory = async (book_category) => {
+	let allBooks = await Book.findAll();
+	let bookWithThisCategory = allBooks.map((item) => {
+		let strWithoutBrackendAndComas = item.categories.replace(/[^\w ]/g, "");
+		item.categorys = strWithoutBrackendAndComas.split(" ");
+		if (item.categorys.includes(book_category)) {
+			return item;
+		}
+	});
+
+	let books = bookWithThisCategory.filter(book => {
+		return book != null;
+	})
+
+	return { data: books };
+};

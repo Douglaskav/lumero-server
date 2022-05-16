@@ -18,6 +18,7 @@ router.post("/book/create", uploadBooks.single("cover"), BookController.create);
 
 router.get("/book/list", BookController.index);
 router.get("/book/profile/:book_id", BookController.indexById);
+router.get("/book/list/:book_category", BookController.indexByCategory);
 
 router.post("/review/create", ReviewController.create);
 router.get("/review/:user_id", ReviewController.indexByUserId);
